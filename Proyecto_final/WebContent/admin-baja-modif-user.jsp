@@ -36,7 +36,7 @@
                         <hr>
                             <div class="form-group">
                                 <label for="id">ID seleccionado:</label>
-                                <input type="number" class="form-control" name="id_modificar" value="<%=usu.getIdUsuario() %>" disabled>
+                                <input type="number" class="form-control" name="id_modificar" value="<%=usu.getIdUsuario() %>" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
@@ -74,39 +74,39 @@
 	                        <hr>
                             <div class="form-group">
                                 <label for="id">ID seleccionado:</label>
-                                <input type="number" class="form-control" name="id_baja" id="id_baja" value="<%=usu.getIdUsuario() %>" disabled>
+                                <input type="number" class="form-control" name="id_baja" id="id_baja" value="<%=usu.getIdUsuario() %>" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre_baja" value="<%=usu.getNombre() %>" disabled>
+                                <input type="text" class="form-control" id="nombre_baja" value="<%=usu.getNombre() %>" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label for="apellido">Apellido:</label>
-                                <input type="text" class="form-control" id="apellido_baja" value="<%=usu.getApellido() %>" disabled>
+                                <input type="text" class="form-control" id="apellido_baja" value="<%=usu.getApellido() %>" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label for="email">E-Mail:</label>
-                                <input type="email" class="form-control" id="email_baja" value="<%=usu.getEmail() %>" disabled>
+                                <input type="email" class="form-control" id="email_baja" value="<%=usu.getEmail() %>" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label for="localidad">Localidad:</label>
-                                <input type="text"  class="form-control" id="localidad_baja" value="<%=usu.getLocalidad() %>" disabled>
+                                <input type="text"  class="form-control" id="localidad_baja" value="<%=usu.getLocalidad() %>" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label for="telefono">Telefono:</label>
-                                <input type="text"  class="form-control" id="telefono_baja" value="<%=usu.getTelefono() %>" disabled>
+                                <input type="text"  class="form-control" id="telefono_baja" value="<%=usu.getTelefono() %>" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label for="celular">Celular:</label>
-                                <input type="text"  class="form-control" id="celular_baja" value="<%=usu.getCelular() %>" disabled>
+                                <input type="text"  class="form-control" id="celular_baja" value="<%=usu.getCelular() %>" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label for="usuario">Usuario:</label>
-                                <input type="text" class="form-control" id="usuario_baja" value="<%=usu.getUsuario() %>" disabled>
+                                <input type="text" class="form-control" id="usuario_baja" value="<%=usu.getUsuario() %>" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label for="contraseÒa">Contrase√±a:</label>
-                                <input type="password" class="form-control" id="password_baja" value="<%=usu.getContraseÒa() %>" disabled>
+                                <input type="password" class="form-control" id="password_baja" value="<%=usu.getContraseÒa() %>" readonly="readonly">
                             </div>
 	                        <div class="form-group">
                                 <button type="submit" class="btn btn-warning" id="btnDelete" name="btnDelete" value="delete">Eliminar</button>

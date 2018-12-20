@@ -46,7 +46,7 @@ public class BajaModifUsuario extends HttpServlet {
 		}
 		else if(request.getParameter("btnUpdate") != null) {
 			Usuario usu = new Usuario();
-			usu.setIdUsuario(Integer.parseInt(request.getParameterValues("id_modificar")[0]));
+			usu.setIdUsuario(Integer.parseInt(request.getParameter("id_modificar")));
 			usu.setNombre(request.getParameter("nombre_modificar"));
 			usu.setApellido(request.getParameter("apellido_modificar"));
 			usu.setEmail(request.getParameter("email_modificar"));

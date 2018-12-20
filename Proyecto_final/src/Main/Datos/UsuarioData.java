@@ -124,7 +124,9 @@ public class UsuarioData {
 		{
 			con = Base.getConnection();
 			String sql = "";
-			sql = "DELETE FROM Usuarios WHERE idUsuario = ?";
+			//En ese solo ABM la baja se hace asi, en los demas hacer DELETE normal
+			//sql = "DELETE FROM Usuarios WHERE idUsuario = ?";
+			sql = "UPDATE Usuarios SET anulado = TRUE WHERE idUsuario = ?";
 			
 			pstm = con.prepareStatement(sql);
 			pstm.setInt(1, usu.getIdUsuario());
@@ -168,9 +170,9 @@ public class UsuarioData {
 		{
 			con = Base.getConnection();
 			String sql = "";
-			sql = "UPDATE Usuarios SET nombre = ?, apelldio = ?,"
+			sql = "UPDATE Usuarios SET nombre = ?, apellido = ?,"
 					+ " localidad = ?, telefono = ?, celular = ?,"
-					+ " email = ?, anulado = ? WHERE idUsuario = ?";
+					+ " email = ? WHERE idUsuario = ?";
 			
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, usu.getNombre());
@@ -179,8 +181,7 @@ public class UsuarioData {
 			pstm.setString(4, usu.getTelefono());
 			pstm.setString(5, usu.getCelular());
 			pstm.setString(6, usu.getEmail());
-			pstm.setBoolean(7, usu.isAnulado());
-			pstm.setInt(8, usu.getIdUsuario());
+			pstm.setInt(7, usu.getIdUsuario());
 			
 			int res = pstm.executeUpdate();
 			
@@ -222,7 +223,7 @@ public class UsuarioData {
 		{
 			con = Base.getConnection();
 			String sql = "";
-			sql = "SELECT * FROM Usuarios WHERE idUsuario = ?";
+			sql = "SELECT * FROM Usuarios WHERE idUsuario = ? AND anulado = FALSE";
 			
 			pstm = con.prepareStatement(sql);
 			pstm.setInt(1, usuario.getIdUsuario());
@@ -274,7 +275,7 @@ public class UsuarioData {
 		try
 		{
 			con = Base.getConnection();
-			String sql = "SELECT * FROM Usuarios WHERE usuario = ?";
+			String sql = "SELECT * FROM Usuarios WHERE usuario = ? AND anulado = FALSE";
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, usu.getUsuario());
 			rs = pstm.executeQuery();
@@ -320,7 +321,7 @@ public class UsuarioData {
 		{
 			con = Base.getConnection();
 			String sql = "";
-			sql += "SELECT * FROM Usuarios";
+			sql += "SELECT * FROM Usuarios AND anulado = FALSE";
 			
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
@@ -374,7 +375,7 @@ public class UsuarioData {
 		{
 			con = Base.getConnection();
 			String sql = "";
-			sql += "SELECT * FROM Usuarios WHERE usuario = ? AND contraseña = ?";
+			sql += "SELECT * FROM Usuarios WHERE usuario = ? AND contraseña = ? AND anulado = FALSE";
 			
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, usuario.getUsuario());
