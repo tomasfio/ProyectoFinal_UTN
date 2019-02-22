@@ -19,4 +19,4 @@ Trabajar en los Branchs
 1)Avisar cunado commit y push
 2)hagan push cuando terminen todo el abm
 
-A los servelt ponerle nombre en mayuscula
+A los servelt ponerle nombre con a primer letra en mayuscula (Recordar no se pueden repertir los nombres de los servlet)
