@@ -18,6 +18,7 @@
                     <p class="lead">Bienvenido <%//Usuario%></p>
                     <ul class="nav nav-pills nav-stacked">
                         <li role="presentation"><a href="ListaUsuario">Listado de usuarios</a></li>
+                         <li role="presentation"><a href="ListaMarca">Listado de marcas</a></li>
                     </ul>
                 </div>
 
