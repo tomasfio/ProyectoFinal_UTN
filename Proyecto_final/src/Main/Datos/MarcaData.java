@@ -108,9 +108,8 @@ public class MarcaData {
 		{
 			con = Base.getConnection();
 			String sql = "";
-			sql = "UPDATE Marcas SET nombre = ?, descripcion = ?,"
-					+ "WHERE idMarca = ?";
-			
+			sql = "UPDATE Marcas SET nombre = ?, descripcion = ? WHERE idMarca = ?";
+				
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, marca.getNombre());
 			pstm.setString(2, marca.getDescripcion());
@@ -162,16 +161,16 @@ public class MarcaData {
 			pstm.setInt(1, marca.getIdMarca());
 			rs = pstm.executeQuery();
 			
-			Usuario usu = null;
+			Marca mar = null;
 			
 			while(rs.next())
 			{
-				marca = new Marca();marca = new Marca();
-				marca.setIdMarca(rs.getInt("idMarca"));
-				marca.setDescripcion(rs.getString("descripcion"));
-				marca.setNombre(rs.getString("nombre"));
+				mar = new Marca();
+				mar.setIdMarca(rs.getInt("idMarca"));
+				mar.setNombre(rs.getString("nombre"));
+				mar.setDescripcion(rs.getString("descripcion"));
 			}
-			return marca;
+			return mar;
 		}
 		catch(Exception ex)
 		{
