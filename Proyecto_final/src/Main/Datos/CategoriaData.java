@@ -5,12 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import Main.Entidades.Marca;
+import Main.Entidades.Categoria;
 
 
-public class MarcaData {
-
-	public boolean Insert(Marca marca)
+public class CategoriaData {
+	
+	public boolean Insert(Categoria cat)
 	{
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -19,12 +19,12 @@ public class MarcaData {
 		{
 			con = Base.getConnection();
 			String sql = "";
-			sql += "INSERT INTO marcas(nombre,descripcion) VALUES(?,?)";
+			sql += "INSERT INTO categorias(nombre,descripcion) VALUES(?,?)";
 			
 			pstm = con.prepareStatement(sql);
 			//pstm.RETURN_GENERATED_KEYS();
-			pstm.setString(1, marca.getNombre());
-			pstm.setString(2, marca.getDescripcion());
+			pstm.setString(1, cat.getNombre());
+			pstm.setString(2, cat.getDescripcion());
 			
 			int resultado = pstm.executeUpdate();
 			
@@ -55,7 +55,7 @@ public class MarcaData {
 		}
 	}
 	
-	public boolean Delete(Marca marca)
+	public boolean Delete(Categoria cat)
 	{
 		Connection con = null;
 		PreparedStatement pstm = null;	
@@ -64,10 +64,10 @@ public class MarcaData {
 		{
 			con = Base.getConnection();
 			String sql = "";
-			sql = "DELETE FROM Marcas WHERE idMarca = ?";
+			sql = "DELETE FROM Categorias WHERE idCategoria = ?";
 			
 			pstm = con.prepareStatement(sql);
-			pstm.setInt(1, marca.getIdMarca());
+			pstm.setInt(1, cat.getIdCategoria());
 			
 			int rtdo = pstm.executeUpdate();
 			
@@ -99,7 +99,7 @@ public class MarcaData {
 		}
 	}
 	
-	public boolean Update(Marca marca)
+	public boolean Update(Categoria cat)
 	{
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -108,12 +108,12 @@ public class MarcaData {
 		{
 			con = Base.getConnection();
 			String sql = "";
-			sql = "UPDATE Marcas SET nombre = ?, descripcion = ? WHERE idMarca = ?";
+			sql = "UPDATE Categorias SET nombre = ?, descripcion = ? WHERE idCategoria = ?";
 				
 			pstm = con.prepareStatement(sql);
-			pstm.setString(1, marca.getNombre());
-			pstm.setString(2, marca.getDescripcion());
-			pstm.setInt(3, marca.getIdMarca());
+			pstm.setString(1, cat.getNombre());
+			pstm.setString(2, cat.getDescripcion());
+			pstm.setInt(3, cat.getIdCategoria());
 			
 			int res = pstm.executeUpdate();
 			
@@ -145,7 +145,7 @@ public class MarcaData {
 		}
 	}
 	
-	public Marca GetOne(Marca marca)
+	public Categoria GetOne(Categoria cat)
 	{
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -155,22 +155,22 @@ public class MarcaData {
 		{
 			con = Base.getConnection();
 			String sql = "";
-			sql = "SELECT * FROM Marcas WHERE idMarca = ?";
+			sql = "SELECT * FROM Categorias WHERE idCategoria = ?";
 			
 			pstm = con.prepareStatement(sql);
-			pstm.setInt(1, marca.getIdMarca());
+			pstm.setInt(1, cat.getIdCategoria());
 			rs = pstm.executeQuery();
 			
-			Marca mar = null;
+			Categoria cate = null;
 			
 			while(rs.next())
 			{
-				mar = new Marca();
-				mar.setIdMarca(rs.getInt("idMarca"));
-				mar.setNombre(rs.getString("nombre"));
-				mar.setDescripcion(rs.getString("descripcion"));
+				cate = new Categoria();
+				cate.setIdCategoria(rs.getInt("idCategoria"));
+				cate.setNombre(rs.getString("nombre"));
+				cate.setDescripcion(rs.getString("descripcion"));
 			}
-			return mar;
+			return cate;
 		}
 		catch(Exception ex)
 		{
@@ -192,7 +192,7 @@ public class MarcaData {
 		}
 	}
 	
-	public ArrayList<Marca> GetAll()
+	public ArrayList<Categoria> GetAll()
 	{
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -202,23 +202,23 @@ public class MarcaData {
 		{
 			con = Base.getConnection();
 			String sql = "";
-			sql += "SELECT * FROM Marcas";
+			sql += "SELECT * FROM Categorias";
 			
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			
-			ArrayList<Marca> Marcas = new ArrayList<Marca>();
-			Marca marca = null;
+			ArrayList<Categoria> Categorias = new ArrayList<Categoria>();
+			Categoria cat = null;
 			
 			while(rs.next())
 			{
-				marca = new Marca();
-				marca.setIdMarca(rs.getInt("idMarca"));
-				marca.setDescripcion(rs.getString("descripcion"));
-				marca.setNombre(rs.getString("nombre"));
-				Marcas.add(marca);
+				cat = new Categoria();
+				cat.setIdCategoria(rs.getInt("idCategoria"));
+				cat.setDescripcion(rs.getString("descripcion"));
+				cat.setNombre(rs.getString("nombre"));
+				Categorias.add(cat);
 			}
-			return Marcas;
+			return Categorias;
 		}
 		catch(Exception ex)
 		{
