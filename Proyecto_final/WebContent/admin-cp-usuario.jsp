@@ -21,6 +21,7 @@
                     <ul class="nav nav-pills nav-stacked">
                         <li role="presentation"><a href="ListaUsuario">Listado de usuarios</a></li>
                          <li role="presentation"><a href="ListaMarca">Listado de marcas</a></li>
+                         <li role="presentation"><a href="ListaCategoria">Listado de categorias</a></li>
                     </ul>
                 </div>
 

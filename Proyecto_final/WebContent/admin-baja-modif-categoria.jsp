@@ -1,5 +1,5 @@
-<%@page import="Main.Negocio.MarcaLogic"%>
-<%@page import="Main.Entidades.Marca"%>
+<%@page import="Main.Negocio.CategoriaLogic"%>
+<%@page import="Main.Entidades.Categoria"%>
 <%@page import="java.util.ArrayList"%>
 
 <!DOCTYPE html>
@@ -25,47 +25,47 @@
 
                 <div class="col-md-7 col-md-offset-1">
                     <% 
-                    	if(request.getAttribute("marca") != null)
+                    	if(request.getAttribute("categoria") != null)
                     	{
                     %>
-                    <form class="form-group" action="BajaModifMarca" method="GET">
+                    <form class="form-group" action="BajaModifCategoria" method="GET">
                     <%
-                    		Marca mar = (Marca)request.getAttribute("marca");  
+                    		Categoria cat = (Categoria)request.getAttribute("categoria");  
                     		if(request.getAttribute("accion") == "update")
                     		{
                      %>
-                        <h1>Modificación de marca</h1>
+                        <h1>Modificación de categoria</h1>
                         <hr>
                             <div class="form-group">
                                 <label for="id">ID seleccionado:</label>
-                                <input type="number" class="form-control" name="id_modificar" value="<%=mar.getIdMarca() %>" readonly="readonly">
+                                <input type="number" class="form-control" name="id_modificar" value="<%=cat.getIdCategoria() %>" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" name="nombre_modificar" value="<%=mar.getNombre() %>" required>
+                                <input type="text" class="form-control" name="nombre_modificar" value="<%=cat.getNombre() %>" required>
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Descripcion:</label>
-                                <input type="text" class="form-control" name="descripcion_modificar" value="<%=mar.getDescripcion() %>" required>
+                                <input type="text" class="form-control" name="descripcion_modificar" value="<%=cat.getDescripcion() %>" required>
                             </div>
                             
                             <div class="form-group">
                               <button type="submit" class="btn btn-warning" id="btnUpdate" name="btnUpdate" value="update">Modificar</button>
                             </div>
                     <% } else if(request.getAttribute("accion") == "delete"){ %>
-	                        <h1>Baja de una marca</h1>
+	                        <h1>Baja de una categoria</h1>
 	                        <hr>
                             <div class="form-group">
                                 <label for="id">ID seleccionado:</label>
-                                <input type="number" class="form-control" name="id_baja" id="id_baja" value="<%=mar.getIdMarca() %>" readonly="readonly">
+                                <input type="number" class="form-control" name="id_baja" id="id_baja" value="<%=cat.getIdCategoria() %>" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre_baja" value="<%=mar.getNombre() %>" readonly="readonly">
+                                <input type="text" class="form-control" id="nombre_baja" value="<%=cat.getNombre() %>" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Descripcion:</label>
-                                <input type="text" class="form-control" id="descripcion_baja" value="<%=mar.getDescripcion() %>" readonly="readonly">
+                                <input type="text" class="form-control" id="descripcion_baja" value="<%=cat.getDescripcion() %>" readonly="readonly">
                             </div>                       
                         
 	                        <div class="form-group">
@@ -80,10 +80,10 @@
                    		else 
                    		{ 
                    		%>
-                        <h1>Gestión de una marca</h1>
+                        <h1>Gestión de una categoria</h1>
                         <hr>
-                        <div class="alert alert-danger">No existe una marca con el ID ingresado, o ha ocurrido un error en la transacción.</div>
-                        <a class="btn btn-primary" href="ListaMarca" role="button">Volver al listado</a>
+                        <div class="alert alert-danger">No existe una categoria con el ID ingresado, o ha ocurrido un error en la transacción.</div>
+                        <a class="btn btn-primary" href="ListaCategoria" role="button">Volver al listado</a>
                     	<% 
                    		} 
                     	%>

@@ -25,19 +25,19 @@
                 </div>
 
                 <div class="col-md-7 col-md-offset-1">
-                    <h1>Alta de una nueva marca</h1>
+                    <h1>Alta de una nueva categoria</h1>
                     <hr>
-                    <form class="form-group" action="AltaMarca" method="post">
+                    <form class="form-group" action="AltaCategoria" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="nombre" placeholder="Nombre de la marca..." required>
+                            <input type="text" class="form-control" name="nombre" placeholder="Nombre de la categoria..." required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="descripcion" placeholder="Descripcion de la marca..." required>
+                            <input type="text" class="form-control" name="descripcion" placeholder="Descripcion de la categoria..." required>
                         </div>
                                     
                         <div class="form-group">
                             <button type="reset" value="Reset" class="btn btn-default" >Limpiar</button>
-                            <input type="submit" class="btn btn-primary pull-right" name="submit" value="Cargar marca">
+                            <input type="submit" class="btn btn-primary pull-right" name="submit" value="Cargar categoria">
                         </div>
 
                     </form>

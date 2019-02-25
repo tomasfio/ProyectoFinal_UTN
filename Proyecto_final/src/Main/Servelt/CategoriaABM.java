@@ -34,7 +34,7 @@ public class CategoriaABM extends HttpServlet {
 		if(request.getParameter("btnUpdate") != null || request.getParameter("btnDelete") != null) 
 		 {
 			 Categoria cat = new Categoria();
-			 cat.setIdCategoria(Integer.parseInt(request.getParameter("id_marca")));
+			 cat.setIdCategoria(Integer.parseInt(request.getParameter("id_categoria")));
 			 
 			 CategoriaLogic cl = new CategoriaLogic();
 			 Categoria cate = cl.GetOne(cat);
