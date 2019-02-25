@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Main.Datos.MarcaData;
 import Main.Entidades.Marca;
-import Main.Entidades.Usuario;
+
 
 public class MarcaLogic {
 	MarcaData marcaData;
