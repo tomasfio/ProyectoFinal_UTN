@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 		<style type="text/css">
 	    	<%@include file="css/styles-css/cp-styles.css"%>
 	    	<%@include file="css/bootstrap.min.css"%>
@@ -20,6 +19,7 @@
                     <p class="lead">Bienvenido </p>
                     <ul class="nav nav-pills nav-stacked">
                         <li role="presentation"><a href="ListaUsuario">Listado de usuarios</a></li>
+                        <li role="presentation"><a href="ListaMarca">Listado de marcas</a></li>
                     </ul>
                 </div>
 
