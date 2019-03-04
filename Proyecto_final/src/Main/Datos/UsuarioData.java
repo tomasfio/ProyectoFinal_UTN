@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import Main.Entidades.Usuario;
 
 public class UsuarioData {
+	
 	public ArrayList<Usuario> GetByUsuario(Usuario usuario){
 		Connection con = null;
 		PreparedStatement pstm = null;

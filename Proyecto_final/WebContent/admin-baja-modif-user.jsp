@@ -12,6 +12,15 @@
     </style>
 </head>
     <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	       <div class="container">
+	           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	               <ul class="nav navbar-nav navbar-right">
+						<li><a href="LogOut"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
+	               </ul>
+	           </div>
+	       </div>
+	   </nav>
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
