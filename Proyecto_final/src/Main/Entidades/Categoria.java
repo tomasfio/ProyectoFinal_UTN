@@ -1,6 +1,11 @@
 package Main.Entidades;
 
 public class Categoria {
+	public Categoria() {}
+	public Categoria(int id) {
+		this.idCategoria = id;
+	}
+	
 	private int idCategoria;
 	private String nombre;
 	private String descripcion;

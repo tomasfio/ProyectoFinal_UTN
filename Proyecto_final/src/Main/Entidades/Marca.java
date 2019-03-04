@@ -1,6 +1,11 @@
 package Main.Entidades;
 
 public class Marca {
+	public Marca() {}
+	public Marca(int id) {
+		this.idMarca = id;
+	}
+	
 	private int idMarca;
 	private String nombre;
 	private String descripcion;

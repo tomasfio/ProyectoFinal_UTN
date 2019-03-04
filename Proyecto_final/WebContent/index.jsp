@@ -138,7 +138,7 @@
 			                     		for(Marca mar : marcas){
 			                     			%>
 				                     			<div class="panel-heading">
-			                     					<h5></body><a href="Index?idCat=<%=mar.getIdMarca() %>" ><%=mar.getNombre() %></a></h5>
+			                     					<h5></body><a href="Index?idMar=<%=mar.getIdMarca() %>" ><%=mar.getNombre() %></a></h5>
 		           								</div>
 			                     			<%
 			                     		}
@@ -156,6 +156,40 @@
        		 			%><p><strong><%=request.getAttribute("error") %></strong></p><%
        		 		}
        		 	%>
+       		 	<div class="row carousel-holder">
+                        <h1 align="center">Ultimo libros publicados</h1>
+                        <%
+                        	if(request.getAttribute("listaProducto") != null){
+                        		ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("listaProducto");
+                        		for(Producto pro : productos){
+                        			%>
+                    				<div class="col-md-12">
+                        				<h2><p><%=pro.getNombre() %></p></h2>
+                        				
+                        				<p>Descripcion: <%=pro.getDescripcion() %></p>
+                        				<p>Categoria: <%=pro.getCategoria().getNombre() %>
+                        				<p>Categoria: <%=pro.getMarca().getNombre() %>
+                        				<h4>Precio: <%=pro.getPrecioUnidad() %></h4>
+                        				
+                        				<%
+                        					if(request.getSession().getAttribute("user") != null){
+                        						%>
+	                        						<form class="form-inline" action="AgregarAlCarrito" method="post">
+		                        						<div>
+	                        								<input class="form-control" type="hidden" name="id" id="id" value=<%=pro.getIdProducto() %> />
+                        									<input class="form-control" type="number" name="cantidad" id="cantidad" placeholder="cantidad"/>
+                        									<button class="form-control" type="submit">Agregar al carrito</button>
+		                        						</div>
+	                        						</form>
+                        						<%
+                        					}
+                        				%> 
+                        				</div>
+                        			<%
+                        		}
+                        	}
+                        %>
+                    </div>
        		 </div>
           </div>
        </div>

@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Main.Entidades.*;
 import Main.Negocio.CategoriaLogic;
 import Main.Negocio.MarcaLogic;
+import Main.Negocio.ProductoLogic;
 
 /**
  * Servlet implementation class Indez
@@ -29,6 +31,23 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ProductoLogic pl = new ProductoLogic();
+		
+		if(request.getAttribute("idMar") != null) {
+			Producto pro = new Producto();
+			pro.setMarca(new Marca((int)request.getAttribute("idMar")));
+			request.setAttribute("listaProducto", pl.GetByMarca(pro));
+		}
+		else if(request.getAttribute("idCat") != null) {
+			Producto pro = new Producto();
+			pro.setCategoria(new Categoria((int)request.getAttribute("idCat")));
+			request.setAttribute("listaProducto", pl.GetByCategoria(pro));
+		}
+		else {
+			request.setAttribute("listaProducto", pl.GetAll());
+		}
+		
+		
 		CategoriaLogic cl = new CategoriaLogic();
 		request.setAttribute("listaCategoria", cl.GetAll());
 		
