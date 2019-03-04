@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Main.Negocio.CategoriaLogic;
-import Main.Negocio.MarcaLogic;
+import Main.Entidades.Usuario;
+import Main.Negocio.UsuarioLogic;
 
 /**
- * Servlet implementation class Indez
+ * Servlet implementation class SingIn
  */
-@WebServlet("/Index")
-public class Index extends HttpServlet {
+@WebServlet("/SingIn")
+public class SingIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Index() {
+    public SingIn() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +29,29 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CategoriaLogic cl = new CategoriaLogic();
-		request.setAttribute("listaCategoria", cl.GetAll());
+		UsuarioLogic ul = new UsuarioLogic();
+		Usuario usu = new Usuario();
+		usu.setUsuario(request.getParameter("usuario"));
+		usu.setContraseña(request.getParameter("pass"));
 		
-		MarcaLogic ml = new MarcaLogic();
-		request.setAttribute("listaMarca", ml.GetAll());
-		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		usu = ul.GetByUsuCon(usu);
+		if (usu != null)
+		{
+			request.getSession().setAttribute("user", usu);
+			if(usu.getTipoUsuario() == 1)
+			{
+				request.getRequestDispatcher("Index").forward(request, response);
+			}
+			else
+			{
+				request.getRequestDispatcher("index-cp.jsp").forward(request, response);
+			}
+		}
+		else 
+		{
+			request.setAttribute("error", "Usuario y/o contraseña incorrecto");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		};
 	}
 
 	/**

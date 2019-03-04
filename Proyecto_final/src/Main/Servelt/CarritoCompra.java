@@ -7,20 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Main.Entidades.Usuario;
 import Main.Negocio.CategoriaLogic;
 import Main.Negocio.MarcaLogic;
+import Main.Util.Autentificacion;
 
 /**
- * Servlet implementation class Indez
+ * Servlet implementation class CarritoCompra
  */
-@WebServlet("/Index")
-public class Index extends HttpServlet {
+@WebServlet("/CarritoCompra")
+public class CarritoCompra extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Index() {
+    public CarritoCompra() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +31,26 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CategoriaLogic cl = new CategoriaLogic();
-		request.setAttribute("listaCategoria", cl.GetAll());
-		
-		MarcaLogic ml = new MarcaLogic();
-		request.setAttribute("listaMarca", ml.GetAll());
-		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		Autentificacion aut = new Autentificacion();
+		if(!aut.AutentificacionCliente((Usuario)request.getSession().getAttribute("user"))) {
+    		response.sendRedirect(request.getContextPath() + "/index.jsp");
+		}
+		else {
+			if(request.getSession().getAttribute("carritoCompra") != null)
+			{
+				/*Venta venta = (Venta)request.getSession().getAttribute("carritoCompra");
+				request.setAttribute("listaDetalleVenta", venta.getDetallesVentas());
+				request.setAttribute("importeTotal", venta.getImporte());*/
+			}
+
+			CategoriaLogic cl = new CategoriaLogic();
+			request.setAttribute("listaCategoria", cl.GetAll());
+			
+			MarcaLogic ml = new MarcaLogic();
+			request.setAttribute("listaMarca", ml.GetAll());
+			
+			request.getRequestDispatcher("carrito-compras.jsp").forward(request, response);
+		}
 	}
 
 	/**

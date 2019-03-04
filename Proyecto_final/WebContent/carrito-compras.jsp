@@ -151,11 +151,49 @@
        		 </div>
        		 
        		 <div class="col-md-9">
-       		 	<%
-       		 		if(request.getAttribute("error") != null){
-       		 			%><p><strong><%=request.getAttribute("error") %></strong></p><%
-       		 		}
-       		 	%>
+       		 	<div class="col-md-12">
+                        <h1 align="center">Carrito de compras</h1>
+                        	<table class="table table-striped">
+                        		<thead>
+                        			<tr>
+                        				<td><b>Producto</b></td>
+                        				<td><b>Cantidad</b></td>
+                        				<td><b>Subtotal</b></td>
+                       				</tr>
+                   				</thead> 
+                   				<tbody>
+                   					<%
+                   					if(request.getAttribute("") != null)
+                   					{
+
+                   						//ArrayList<DetalleVenta> detallesVentas = (ArrayList<DetalleVenta>)request.getAttribute("listaDetalleVenta");
+                   						//for(DetalleVenta detVenta : detallesVentas)
+                   						//{
+                   							%>
+                   								<tr>
+                   									<td><% %></td>
+                   									<td><% %></td>
+                   									<td><% %></td>
+                   								</tr>
+                   							<%
+                   						//}
+                   					}
+                   					%>
+                   				</tbody>
+                   				<tfoot>
+                   					<tr>
+                   						<td>Total <% %></td>
+                   					</tr>
+                   				</tfoot>
+                        	</table>
+                        	<form action="RegistrarVenta" method="get" class="form-inline" enctype="multipart/form-data">
+                       			<input class="form-control" type="hidden" name="direccion" id="direccion" placeholder="direccion"/><br><br>
+                       			<button class="btn btn-warning" type="submit" name="btnRegistrar" value="registrar">Registrar venta</button>
+                      			<div class="form-group pull-right">
+                            		 <button type="submit" class="btn btn-danger" name="btnDelete" value="delete">Vaciar carrito</button>
+                       	 		</div>
+                        	</form>
+                    </div>
        		 </div>
           </div>
        </div>

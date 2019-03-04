@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Main.Negocio.CategoriaLogic;
-import Main.Negocio.MarcaLogic;
 
 /**
- * Servlet implementation class Indez
+ * Servlet implementation class ListaCategoria
  */
-@WebServlet("/Index")
-public class Index extends HttpServlet {
+@WebServlet("/ListaCategoria")
+public class ListaCategoria extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Index() {
+    public ListaCategoria() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +28,12 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		CategoriaLogic cl = new CategoriaLogic();
-		request.setAttribute("listaCategoria", cl.GetAll());
 		
-		MarcaLogic ml = new MarcaLogic();
-		request.setAttribute("listaMarca", ml.GetAll());
+		request.setAttribute("listaCategorias", cl.GetAll());
 		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("admin-cp-categoria.jsp").forward(request, response);
 	}
 
 	/**
