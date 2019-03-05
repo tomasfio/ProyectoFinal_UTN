@@ -36,12 +36,6 @@ public class CarritoCompra extends HttpServlet {
     		response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
 		else {
-			if(request.getSession().getAttribute("carritoCompra") != null)
-			{
-				/*Venta venta = (Venta)request.getSession().getAttribute("carritoCompra");
-				request.setAttribute("listaDetalleVenta", venta.getDetallesVentas());
-				request.setAttribute("importeTotal", venta.getImporte());*/
-			}
 
 			CategoriaLogic cl = new CategoriaLogic();
 			request.setAttribute("listaCategoria", cl.GetAll());

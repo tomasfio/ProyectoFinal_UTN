@@ -11,11 +11,7 @@ Los primero que hay que hacer es:
   9. Ingreso de mercaderia
   10. ABM Ofertas
   11. ABM Transportista
-  12.Pagina principal (tomas)
-  13.Carrito de compras (tomas)
-  14.Login (tomas)
-
-Trabajar en los Branchs
+  Trabajar en los Branchs
 1)Avisar cunado commit y push
 2)hagan push cuando terminen todo el abm
 

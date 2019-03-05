@@ -32,15 +32,21 @@ public class Index extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductoLogic pl = new ProductoLogic();
-		
-		if(request.getAttribute("idMar") != null) {
+		if(request.getParameter("busca") != null) {
 			Producto pro = new Producto();
-			pro.setMarca(new Marca((int)request.getAttribute("idMar")));
+			pro.setNombre((String)request.getParameter("busca"));
+			pro.setDescripcion((String)request.getParameter("busca"));
+			
+			request.setAttribute("listaProducto", pl.GetProducto(pro));
+		}
+		else if(request.getParameter("idMar") != null) {
+			Producto pro = new Producto();
+			pro.setMarca(new Marca(Integer.parseInt(request.getParameter("idMar"))));
 			request.setAttribute("listaProducto", pl.GetByMarca(pro));
 		}
-		else if(request.getAttribute("idCat") != null) {
+		else if(request.getParameter("idCat") != null) {
 			Producto pro = new Producto();
-			pro.setCategoria(new Categoria((int)request.getAttribute("idCat")));
+			pro.setCategoria(new Categoria(Integer.parseInt(request.getParameter("idCat"))));
 			request.setAttribute("listaProducto", pl.GetByCategoria(pro));
 		}
 		else {

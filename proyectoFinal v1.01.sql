@@ -52,7 +52,7 @@ CREATE TABLE `categorias` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`idCategoria`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,6 +61,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
+INSERT INTO `categorias` VALUES (1,'Lactios','Productos derivados de la leche'),(2,'Alfajores','Alfajores');
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,7 +168,7 @@ CREATE TABLE `marcas` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`idMarca`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,6 +177,7 @@ CREATE TABLE `marcas` (
 
 LOCK TABLES `marcas` WRITE;
 /*!40000 ALTER TABLE `marcas` DISABLE KEYS */;
+INSERT INTO `marcas` VALUES (1,'La serrenisima','Empresa de productos lactios y derivados');
 /*!40000 ALTER TABLE `marcas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,13 +195,13 @@ CREATE TABLE `movimientos` (
   `observacion` varchar(200) DEFAULT NULL,
   `importe` double NOT NULL,
   `idUsuario` int(11) NOT NULL,
-  `idEntregaDetalle` int(11) NOT NULL,
+  `idEntregaDetalle` int(11) DEFAULT NULL,
   PRIMARY KEY (`idMovimiento`),
   KEY `FK_Detalle_Movimiento_idx` (`idEntregaDetalle`),
   KEY `FK_Detalle_Usuario_idx` (`idUsuario`),
   CONSTRAINT `FK_Detalle_Movimiento` FOREIGN KEY (`idEntregaDetalle`) REFERENCES `entregas_detalles` (`identregadetalles`),
   CONSTRAINT `FK_Detalle_Usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,6 +210,7 @@ CREATE TABLE `movimientos` (
 
 LOCK TABLES `movimientos` WRITE;
 /*!40000 ALTER TABLE `movimientos` DISABLE KEYS */;
+INSERT INTO `movimientos` VALUES (1,'2019-03-05 03:28:47','Saavedra 1967','',87.6,2,NULL),(2,'2019-03-05 03:29:51','Saavedra 1967','',87.6,2,NULL),(3,'2019-03-05 03:36:55','Entre rios 1123','No mandarlo de tarde',25.6,2,NULL),(4,'2019-03-05 03:40:43','Saavedra 1967','',25.6,2,NULL);
 /*!40000 ALTER TABLE `movimientos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,14 +222,17 @@ DROP TABLE IF EXISTS `movistock`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `movistock` (
-  `idMovistock` int(11) NOT NULL,
+  `idMovistock` int(11) NOT NULL AUTO_INCREMENT,
   `cantidad` int(11) NOT NULL,
   `subTotal` double NOT NULL,
   `idMovimiento` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL,
   PRIMARY KEY (`idMovistock`),
   KEY `FK_Movimiento_Movistock_idx` (`idMovimiento`),
-  CONSTRAINT `FK_Movimiento_Movistock` FOREIGN KEY (`idMovimiento`) REFERENCES `movimientos` (`idmovimiento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_Producto_Movistock_idx` (`idProducto`),
+  CONSTRAINT `FK_Movimiento_Movistock` FOREIGN KEY (`idMovimiento`) REFERENCES `movimientos` (`idmovimiento`),
+  CONSTRAINT `FK_Producto_Movistock` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idproducto`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,6 +241,7 @@ CREATE TABLE `movistock` (
 
 LOCK TABLES `movistock` WRITE;
 /*!40000 ALTER TABLE `movistock` DISABLE KEYS */;
+INSERT INTO `movistock` VALUES (1,2,51.2,2,1),(2,1,36.4,2,2),(3,1,25.6,3,1),(4,1,25.6,4,1);
 /*!40000 ALTER TABLE `movistock` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -336,7 +343,7 @@ CREATE TABLE `productos` (
   KEY `FK_Producto_Categoria_idx` (`idCategoria`),
   CONSTRAINT `FK_Producto_Categoria` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`idcategoria`),
   CONSTRAINT `FK_Producto_Marca` FOREIGN KEY (`idMarca`) REFERENCES `marcas` (`idmarca`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -345,6 +352,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+INSERT INTO `productos` VALUES (1,'Prueba 1','Producto de prueba',25.6,1,1),(2,'Prueba 2','Producto de prueba 2',36.4,1,1);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -449,7 +457,7 @@ CREATE TABLE `usuarios` (
   `tipoUsuario` int(11) NOT NULL,
   `anulado` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -458,6 +466,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'tomasfio','12345678','Tomas','Fiorenza','San lorenzo','03476 #######','03476 15698234','tomas4fiorenza@gmail.com','2018-12-20 04:38:11',0,0),(2,'julboquita','87654321','Pablo','Perna','San lorenzo','03476 #######','03476 15698234','julian@gmail.com','2018-12-20 04:38:35',1,0);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -470,4 +479,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-17 18:08:52
+-- Dump completed on 2019-03-05 15:52:33
