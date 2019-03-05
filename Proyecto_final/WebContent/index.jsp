@@ -174,7 +174,7 @@
 	                        						<form class="form-inline" action="AgregarAlCarrito" method="post">
 		                        						<div>
 	                        								<input class="form-control" type="hidden" name="id" id="id" value=<%=pro.getIdProducto() %> />
-                        									<input class="form-control" type="number" name="cantidad" id="cantidad" placeholder="cantidad"/>
+                        									<input class="form-control" type="number" name="cantidad" id="cantidad" placeholder="cantidad" required/>
                         									<button class="form-control" type="submit">Agregar al carrito</button>
 		                        						</div>
 	                        						</form>

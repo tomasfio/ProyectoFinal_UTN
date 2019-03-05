@@ -1,6 +1,11 @@
 package Main.Entidades;
 
 public class Producto {
+	public Producto() {}
+	public Producto(int id) {
+		this.idProducto = id;
+	}
+	
 	private int idProducto;
 	private String nombre;
 	private String descripcion;

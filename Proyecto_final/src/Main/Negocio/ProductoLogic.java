@@ -25,5 +25,9 @@ public class ProductoLogic {
 	public ArrayList<Producto> GetProducto(Producto pro){
 		return proData.GetProducto(pro);
 	}
+	
+	public Producto GetOne(Producto pro) {
+		return proData.GetOne(pro);
+	}
 
 }

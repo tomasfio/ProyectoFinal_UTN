@@ -27,6 +27,20 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  	
+  	<script type="text/javascript">
+  	<%
+  	if(request.getAttribute("venta") != null){
+  	    if((boolean)request.getAttribute("venta")){
+  	    	%>alert('Se ha registrado la venta con exito');<%
+  	    }
+  	    else{
+  	        %>alert('Hubo un error y no se ha podido registrar la venta');<%
+  	    }
+  	}
+  	%>
+  	</script>
+  	
   </head>
   <body>
         <body>
@@ -163,31 +177,44 @@
                    				</thead> 
                    				<tbody>
                    					<%
-                   					if(request.getAttribute("") != null)
+                   					if(request.getSession().getAttribute("carrito") != null)
                    					{
+                   						Movimiento carrito = (Movimiento)request.getSession().getAttribute("carrito");
 
-                   						//ArrayList<DetalleVenta> detallesVentas = (ArrayList<DetalleVenta>)request.getAttribute("listaDetalleVenta");
-                   						//for(DetalleVenta detVenta : detallesVentas)
-                   						//{
+                   						ArrayList<Movistock> detalles = (ArrayList<Movistock>)carrito.getDetalles();
+                   						for(Movistock detalle : detalles)
+                   						{
                    							%>
                    								<tr>
-                   									<td><% %></td>
-                   									<td><% %></td>
-                   									<td><% %></td>
+                   									<td><%=detalle.getProducto().getNombre() %></td>
+                   									<td><%=detalle.getCantidad() %></td>
+                   									<td><%=detalle.getSubtotal() %></td>
                    								</tr>
                    							<%
-                   						//}
+                   						}
+                   						%>
+                   						</tbody>
+	                   				<tfoot>
+	                   					<tr>
+	                   						<td>Total <%=carrito.getImporte() %></td>
+	                   					</tr>
+	                   				</tfoot>
+                   					<%
                    					}
-                   					%>
-                   				</tbody>
-                   				<tfoot>
-                   					<tr>
-                   						<td>Total <% %></td>
-                   					</tr>
-                   				</tfoot>
+                				%>
                         	</table>
-                        	<form action="RegistrarVenta" method="get" class="form-inline" enctype="multipart/form-data">
-                       			<input class="form-control" type="hidden" name="direccion" id="direccion" placeholder="direccion"/><br><br>
+                        	<form action="RegistrarVenta" method="post">
+                       			<input class="form-control" type="text" name="direccion" id="direccion" placeholder="direccion donde se realiza la entrega"/>
+                       			 <%
+				                	if(request.getAttribute("faltaDireccion") != null)
+				                	{
+				                		%>
+				                		<p style="color : red;"><%=request.getAttribute("faltaDireccion") %></p>
+				                		<%
+				               		} 
+			               		%>
+                       			<br>
+                       			<input class="form-control" type="text" name="observacion" id="observacion" placeholder="Comentarios u observaciones del pedido" /><br><br>
                        			<button class="btn btn-warning" type="submit" name="btnRegistrar" value="registrar">Registrar venta</button>
                       			<div class="form-group pull-right">
                             		 <button type="submit" class="btn btn-danger" name="btnDelete" value="delete">Vaciar carrito</button>
