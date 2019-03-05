@@ -147,7 +147,7 @@ public class ProductoData {
 				pro.setPrecioUnidad(rs.getDouble("precioUnidad"));
 				pro.setMarca(marData.GetOne(new Marca(rs.getInt("idMarca"))));
 				pro.setCategoria(catData.GetOne(new Categoria(rs.getInt("idCategoria"))));
-				productos.add(producto);
+				productos.add(pro);
 			}
 			return productos;
 		}
@@ -202,8 +202,65 @@ public class ProductoData {
 				pro.setPrecioUnidad(rs.getDouble("precioUnidad"));
 				pro.setMarca(marData.GetOne(new Marca(rs.getInt("idMarca"))));
 				pro.setCategoria(catData.GetOne(new Categoria(rs.getInt("idCategoria"))));
-				productos.add(producto);
+				productos.add(pro);
 			}
+			return productos;
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+			throw new RuntimeException(ex);
+		}
+		finally
+		{
+			try 
+			{
+				if(rs != null) rs.close();
+				if(pstm != null) pstm.close();
+			}
+			catch(Exception ex)
+			{
+				ex.printStackTrace();
+				throw new RuntimeException(ex);
+			}
+		}
+	}
+	
+	public ArrayList<Producto> GetProducto(Producto producto)
+	{
+		Connection con = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		CategoriaData catData = new CategoriaData();
+		MarcaData marData = new MarcaData();
+		
+		try {
+			con = Base.getConnection();
+			String sql = "";
+			sql = "SELECT * FROM productos " +
+				"WHERE nombre LIKE ? OR descripcion LIKE ? ";
+			
+			pstm = con.prepareStatement(sql);
+			
+			pstm.setString(1, "%" + producto.getNombre() + "%");
+			pstm.setString(2, "%" + producto.getDescripcion() + "%");
+			
+			rs = pstm.executeQuery();
+			ArrayList<Producto> productos = new ArrayList<Producto>();
+			Producto pro = null;
+			
+			while(rs.next())
+			{
+				pro = new Producto();
+				pro.setIdProducto(rs.getInt("idProducto"));
+				pro.setNombre(rs.getString("nombre"));
+				pro.setDescripcion(rs.getString("descripcion"));
+				pro.setPrecioUnidad(rs.getDouble("precioUnidad"));
+				pro.setMarca(marData.GetOne(new Marca(rs.getInt("idMarca"))));
+				pro.setCategoria(catData.GetOne(new Categoria(rs.getInt("idCategoria"))));
+				productos.add(pro);
+			}
+			
 			return productos;
 		}
 		catch(Exception ex)

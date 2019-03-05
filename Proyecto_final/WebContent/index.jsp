@@ -29,7 +29,6 @@
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   </head>
   <body>
-        <body>
                 <!-- Navigation -->
                 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                     <div class="container">
@@ -103,7 +102,7 @@
        			
           			<p class="lead">Buscar produto</p>
 			          	<div class="panel-group">
-			   				<form action="#" method="post">
+			   				<form action="Index" method="get">
 			           			<input type="text" class="form-control" name="busca" id="busca" placeholder="Buscar..." />
 			           		</form>
 			       		</div>
@@ -157,7 +156,6 @@
        		 		}
        		 	%>
        		 	<div class="row carousel-holder">
-                        <h1 align="center">Ultimo libros publicados</h1>
                         <%
                         	if(request.getAttribute("listaProducto") != null){
                         		ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("listaProducto");
@@ -165,11 +163,10 @@
                         			%>
                     				<div class="col-md-12">
                         				<h2><p><%=pro.getNombre() %></p></h2>
-                        				
                         				<p>Descripcion: <%=pro.getDescripcion() %></p>
                         				<p>Categoria: <%=pro.getCategoria().getNombre() %>
-                        				<p>Categoria: <%=pro.getMarca().getNombre() %>
-                        				<h4>Precio: <%=pro.getPrecioUnidad() %></h4>
+                        				<p>Marca: <%=pro.getMarca().getNombre() %>
+                        				<h5>Precio por unidad: <%=pro.getPrecioUnidad() %></h5>
                         				
                         				<%
                         					if(request.getSession().getAttribute("user") != null){
